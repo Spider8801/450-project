@@ -87,9 +87,9 @@ char *udptalker(int port_udp, char *msg)
 	if (strcmp(buffer, "PASS") == 0 || strcmp(buffer, "FAIL_PASS_NO_MATCH") == 0 || strcmp(buffer, "FAIL_NO_USER") == 0)
 		printf("\nThe main server received the result of the authentication request from ServerS using UDP over port %d.", udp_client_port);
 	else if (port_udp == 43389)
-		printf("\nThe main server received the response from serverD using UDP over port %d.", udp_client_port);
-	else if (port_udp == 42389)
 		printf("\nThe main server received the response from serverU using UDP over port %d.", udp_client_port);
+	else if (port_udp == 42389)
+		printf("\nThe main server received the response from serverD using UDP over port %d.", udp_client_port);
 	close(sockfd);
 	return buffer;
 }
@@ -277,8 +277,8 @@ int main(void)
 				strcat(arr, ",");
 				strcat(arr, array[2]);
 				// printf("\n %s",arr);
-				printf("\nThe main server sent an authentication request to serverC.");
-				char *ret_arr = udptalker(21105, arr);
+				printf("\nThe main server sent an authentication request to serverS.");
+				char *ret_arr = udptalker(41389, arr);
 				// printf("client: received '%s'\n", buf);
 				if (send(new_fd, ret_arr, strlen(ret_arr), 0) == -1)
 					perror("send");
@@ -291,34 +291,34 @@ int main(void)
 				arr1[0] = 0;
 				arr2[0] = 0;
 				retstrq[0] = 0;
-				printf("The main server received from %s to query course/courses %s about %s", array[3], array[1], array[2]);
+				printf("The main server received from %s to query room %s about %s", array[3], array[1], array[2]);
 				x = strtok(array[1], " ");
 				while (x != NULL)
 				{
 					strncpy(checkstr, x, 2);
 					checkstr[2] = '\0';
 					// printf("%s check str",checkstr);
-					if (strcmp(checkstr, "EE") == 0)
+					if (strcmp(checkstr, "D") == 0)
 					{
 						arr1[0] = 0;
-						printf("\nThe main server sent a request to serverEE");
+						printf("\nThe main server sent a request to serverD");
 						strcat(arr1, x);
 						strcat(arr1, ",");
 						strcat(arr1, array[2]);
 						// printf("%s",arr1);
-						char *ret_arr = udptalker(23105, arr1);
+						char *ret_arr = udptalker(43389, arr1);
 						strcat(retstrq, ret_arr);
 						// printf("%s", ret_arr);
 					}
-					else if (strcmp(checkstr, "CS") == 0)
+					else if (strcmp(checkstr, "U") == 0)
 					{
 						arr2[0] = 0;
-						printf("\nThe main server sent a request to serverCS");
+						printf("\nThe main server sent a request to serverU");
 						strcat(arr2, x);
 						strcat(arr2, ",");
 						strcat(arr2, array[2]);
 						// printf("%s",arr1);
-						char *ret_arr = udptalker(22105, arr2);
+						char *ret_arr = udptalker(42389, arr2);
 						strcat(retstrq, ret_arr);
 						// printf("%s", ret_arr);
 					}

@@ -7,13 +7,13 @@
 4) Code files:
 
     All static port numbers were strictly hardcoded as per the project guidelines.
-    ServerEE.c- Runs over UDP port number 23105 
-    ServerCS.c- Runs over UDP port number 22105
-    ServerC.c- Runs over UDP port number 21105
+    ServerEE.c- Runs over UDP port number 43389 
+    ServerCS.c- Runs over UDP port number 42389
+    ServerC.c- Runs over UDP port number 41389
         All the above three servers access the respective txt file and process the information through tokenization and other
         string operations. Based on the result of the query/operations the servers respond with a buffer/message.
 
-    ServerM.c- Runs over TCP port 25105 and UDP port number 24105
+    ServerM.c- Runs over TCP port 45389 and UDP port number 44389
         The main server has two parts. There is a function for all the UDP communications, where the server acts as the
         client and in the main function, the TCP server is implemented.
 
