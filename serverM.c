@@ -64,7 +64,7 @@ char *udptalker(int port_udp, char *msg)
 	servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
 	int n;
-	int udp_client_port = 24105;
+	int udp_client_port = 41389;
 	my_addr1.sin_family = AF_INET;
 	my_addr1.sin_addr.s_addr = INADDR_ANY;
 	my_addr1.sin_port = htons(udp_client_port);
@@ -85,11 +85,11 @@ char *udptalker(int port_udp, char *msg)
 	buffer[n] = '\0';
 	// printf("Server : %s\n", buffer);
 	if (strcmp(buffer, "PASS") == 0 || strcmp(buffer, "FAIL_PASS_NO_MATCH") == 0 || strcmp(buffer, "FAIL_NO_USER") == 0)
-		printf("\nThe main server received the result of the authentication request from ServerC using UDP over port %d.", udp_client_port);
-	else if (port_udp == 23105)
-		printf("\nThe main server received the response from serverEE using UDP over port %d.", udp_client_port);
-	else if (port_udp == 22105)
-		printf("\nThe main server received the response from serverEE using UDP over port %d.", udp_client_port);
+		printf("\nThe main server received the result of the authentication request from ServerS using UDP over port %d.", udp_client_port);
+	else if (port_udp == 43389)
+		printf("\nThe main server received the response from serverD using UDP over port %d.", udp_client_port);
+	else if (port_udp == 42389)
+		printf("\nThe main server received the response from serverU using UDP over port %d.", udp_client_port);
 	close(sockfd);
 	return buffer;
 }
